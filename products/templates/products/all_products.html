@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Enjoy all the products</h3>
+{{products}}
+{% for instance in products %} 
+<ul>
+    <!-- <a href="{% url 'product_detail' product.id %}">{{instance.title }}</a> -->
+</ul>
+{% endfor %}
+
+{% endblock %}
