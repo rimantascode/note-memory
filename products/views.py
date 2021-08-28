@@ -10,12 +10,11 @@ def product_detail(request):
     return render(request, "products/products.html", context)
 
 def add_product(request):
-    form = ProductForm()
+    form = ProductForm(request.POST or None )
     if form.is_valid():
         form.save()
-
+        form = ProductForm()
     context = {
     'form': form,
     }     
-    print (form)
-    return render(request, 'products/product_create.html', {'form':form})
+    return render(request, 'products/product_create.html', context)
