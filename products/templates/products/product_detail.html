@@ -2,6 +2,8 @@
 
 {% block content %}
 <h1>This is a product detail page</h1>
-{{product.title}}
+
+<a  href="{% url 'product_delete' products.id %}">Delete</a>
+{{products.title}}
 
 {% endblock %}

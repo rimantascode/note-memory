@@ -10,7 +10,7 @@ def all_products(request):
     return render(request, 'products/all_products.html', context)
 
 def product_detail(request, product_id):
-    obj = get_object_or_404(Product, pk=product_id)
+    obj = get_object_or_404(Product, pk = product_id)
     context = {
         "products" : obj
     }
@@ -44,7 +44,6 @@ def edit_product(request, product_id):
     return render(request, "products/edit_product.html", context)
 
 def delete_product(request, product_id):
-    if request.method == "POST":
-        product = get_object_or_404(Product, pk=product_id)
-        product.delete
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
     return redirect(reverse("home"))
