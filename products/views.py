@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse, redirect, reverse
-from .models import Product
+from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
+                              render, reverse)
+
 from .forms import ProductForm
+from .models import Product
+
 
 def all_products(request):
     products = Product.objects.all()
@@ -34,7 +37,7 @@ def edit_product(request, product_id):
         if form.is_valid():
             form.save()
             form = ProductForm()
-            return HttpResponse("The product was updated succesfuly")
+            return redirect(reverse("product_detail", args=[product.id]))
         else:
             HttpResponse("<h1>The form is not correct</h1>")
     context = {
@@ -43,7 +46,11 @@ def edit_product(request, product_id):
     }
     return render(request, "products/edit_product.html", context)
 
+
 def delete_product(request, product_id):
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     return redirect(reverse("home"))
+
+
