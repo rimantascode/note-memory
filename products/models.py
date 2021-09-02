@@ -36,7 +36,7 @@ class Product(models.Model):
         return self.order_number
     
     def updates(self):
-        self.summary = Sum(Product.quantity, OrderSummary.delivery_cost)
+        self.summary = 5
         print("the signal is working {}".format(self.summary))
 
 class OrderSummary(models.Model):
@@ -57,9 +57,10 @@ class OrderSummary(models.Model):
 
     post_save.connect(update_summary, sender=Product)
     
-    def updates(self):
-        self.summary = 10
-        Print("the signal is working")
+    def updatess( asd):
+        calcs = asd.quantity + 10
+        OrderSummary.objects.create(summary=10, delivery_cost=calcs, vat = 200)
+        print("the signal is working as we cab see".format(asd.quantity))
 
     
 
