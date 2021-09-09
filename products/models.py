@@ -30,17 +30,23 @@ class Product(models.Model):
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
+            self.quantity = self.quantity * 100
         super().save(*args, **kwargs)
 
-    def __str__(self):
+    def __str__(self, *args, **kwargs):
         return self.order_number
     
     def updates(self):
         self.summary = 5
         print("the signal is working {}".format(self.summary))
 
+    def duoble(self):
+        self.quantity = self.quantity * 200
+        self.save()
+       
+
 class OrderSummary(models.Model):
-    summary = models.DecimalField(blank=False, default=0, null=False, decimal_places=3, max_digits=10)
+    summary = models.CharField(blank=False, null=False, max_length=200)
     delivery_cost = models.DecimalField(blank=False, default=0, null=False, decimal_places=3, max_digits=10)
     vat = models.DecimalField(blank=False, default=0, null=False, decimal_places=3, max_digits=10)
 
@@ -57,10 +63,14 @@ class OrderSummary(models.Model):
 
     post_save.connect(update_summary, sender=Product)
     
-    def updatess( asd):
-        calcs = asd.quantity + 10
+    def updatess(asd):
+        calcs = asd.quantity + 111
         OrderSummary.objects.create(summary=10, delivery_cost=calcs, vat = 200)
         print("the signal is working as we cab see".format(asd.quantity))
+    
+    def __str__(self, *args, **kwargs):
+        return self.summary
+    
 
     
 
